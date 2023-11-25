@@ -1,0 +1,172 @@
+<template 稿="移除">
+	<slot 站></slot>
+	<section></section>
+</template>
+<template 稿="移除：模板">
+	<template 站></template>
+	<section></section>
+</template>
+<template 稿="移除：脚本">
+	<script type="module" 站>document.documentElement.innerHTML = "333";</script>
+	<section></section>
+</template>
+<template 结果="移除：模板 移除 移除：脚本">
+	<section></section>
+</template>
+<template 稿="模块">
+	<main>模块</main>
+</template>
+<template 稿="模块：替换">
+	<slot 站:src="模块"></slot>
+	<section></section>
+</template>
+<template 结果="模块：替换">
+	<main>模块</main>
+	<section></section>
+</template>
+<template 稿="模块：嵌套 模块：嵌套：不迭代">
+	<slot 站:src="模块：替换"></slot>
+	<section></section>
+</template>
+<template 结果="模块：嵌套">
+	<main>模块</main>
+	<section></section>
+	<section></section>
+</template>
+<template 结果="模块：嵌套：不迭代">
+	<section></section>
+	<section></section>
+</template>
+<template 稿="模块：嵌套：锁死 模块：嵌套：锁死：不报错">
+	<slot 站:src="模块：自引用"></slot>
+	<section></section>
+</template>
+<template 稿="模块：自引用">
+	<slot 站:src="模块：自引用"></slot>
+	<main>模块</main>
+</template>
+<template 结果="模块：嵌套：锁死"><span style="text-decoration: wavy underline tomato;">zhan: 模块：自引用 检测到了循环嵌套</span>
+	<main>模块</main>
+	<section></section>
+</template>
+<template 结果="模块：嵌套：锁死：不报错">
+	<main>模块</main>
+	<section></section>
+</template>
+<template 稿="模块：嵌套：锁死：二重">
+	<slot 站:src="模块：嵌套引用一"></slot>
+	<section></section>
+</template>
+<template 稿="模块：嵌套引用一">
+	<slot 站:src="模块：嵌套引用二"></slot>
+</template>
+<template 稿="模块：嵌套引用二">
+	<main>子模块</main>
+	<slot 站:src="模块：嵌套引用一"></slot>
+</template>
+<template 结果="模块：嵌套：锁死：二重">
+	<main>子模块</main>
+	<span style="text-decoration: wavy underline tomato;">zhan: 模块：嵌套引用一 检测到了循环嵌套</span>
+	<section></section>
+</template>
+<template 稿="脚本：文档操作">
+	<main>原本</main>
+	<script 站:type="module">document.querySelector("main").textContent = "新内容";</script>
+</template>
+<template 结果="脚本：文档操作">
+	<main>新内容</main>
+</template>
+<template 稿="脚本：文档操作：嵌套">
+	<main>大标题</main>
+	<slot 站:src="脚本：文档操作"></slot>
+</template>
+<template 结果="脚本：文档操作：嵌套">
+	<main>大标题</main>
+	<main>新内容</main>
+</template>
+<template 稿="脚本：文档操作：外部">
+	<main>原本</main>
+	<script 站:type="module" 站:src="脚本：外部"></script>
+</template>
+<script 稿="脚本：外部">
+	document.querySelector("main").textContent = "外部内容";
+</script>
+<template 结果="脚本：文档操作：外部">
+	<main>外部内容</main>
+</template>
+<template 稿="插槽：无名">
+	<slot 站:src="插槽：模块">
+		<nav>导航</nav>
+		<main>默认内容</main>
+	</slot>
+	<section></section>
+</template>
+<template 结果="插槽：无名">
+	<header>
+	</header>
+	<nav>导航</nav>
+	<main>默认内容</main>
+	<footer></footer>
+	<section></section>
+</template>
+<template 稿="插槽：记名">
+	<slot 站:src="插槽：模块">
+		<nav>导航</nav>
+		<main>默认内容</main>
+		<span slot="标题">标题</span>
+	</slot>
+	<section></section>
+</template>
+<template 稿="插槽：模块">
+	<header>
+		<slot name="标题"></slot>
+	</header>
+	<slot></slot>
+	<footer></footer>
+</template>
+<template 结果="插槽：记名">
+	<header>
+		<span>标题</span>
+	</header>
+	<nav>导航</nav>
+	<main>默认内容</main>
+	<footer></footer>
+	<section></section>
+</template>
+<template 稿="插槽：默认内容">
+	<slot 站:src="插槽：默认内容模块"></slot>
+	<section></section>
+</template>
+<template 稿="插槽：默认内容模块">
+	<header></header>
+	<slot>
+		<main>默认内容</main>
+	</slot>
+	<footer></footer>
+</template>
+<template 结果="插槽：默认内容">
+	<header></header>
+	<main>默认内容</main>
+	<footer></footer>
+	<section></section>
+</template>
+<template 稿="插槽：非元素内容">
+	<main>主页<slot 站:src="插槽：默认内容模块">萝卜</slot>
+	</main>
+</template>
+<template 结果="插槽：非元素内容">
+	<main>主页 <header></header> 萝卜 <footer></footer>
+	</main>
+</template>
+<template 稿="数据：模块">
+	<script type="application/json" 站:src="json"></script>
+</template>
+<template 结果="数据：模块">
+	<script type="application/json">{"a":1}</script>
+</template>
+<template 稿="脚本：模块">
+	<script 站:src="脚本：外部"></script>
+</template>
+<template 结果="脚本：模块">
+	<script> document.querySelector("main").textContent = "外部内容"; </script>
+</template>

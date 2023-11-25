@@ -1,0 +1,17 @@
+{
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 120
+	},
+	"compilerOptions": {
+		"checkJs": true
+	},
+	"exclude": [
+		"测试/"
+	],
+	"tasks": {
+		"ce-shi": "deno test --allow-read --allow-sys --allow-env --allow-net --allow-write --allow-run --coverage=cov",
+		"ce-shi-liu-lan-qi": "echo '运行浏览器测试： http://localhost:4507/测试/' && deno run --allow-read=. --allow-net https://deno.land/std/http/file_server.ts",
+		"ce-shi-fu-gai": "deno coverage cov"
+	}
+}

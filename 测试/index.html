@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh" style="max-inline-size: 768px; box-sizing: border-box; font-family: simsun;">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="importmap">{"imports":{"/库/源.ts":"/测试/源.js"}}</script>
+	<script type="module">
+		globalThis.Deno = {
+			test: (name, fn) => {
+				const 测试元素 = document.createElement("section", { is: "ce-shi" });
+				{
+					const 测试名 = document.createTextNode(name);
+					$("[name=测试名]", 测试元素.S)[0].assign(测试名);
+					测试元素.append(测试名);
+				}
+				测试元素.运行 = fn;
+				$("main")[0].append(测试元素);
+				测试元素.测试();
+			}
+		};
+		globalThis.$ = (选择器, 起始节点 = document) => 起始节点.querySelectorAll(选择器);
+		customElements.define("ce-shi", class extends HTMLElement {
+			static 模板 = $("template")[0].content;
+			constructor() {
+				super();
+				this.S = this.attachShadow({ mode: "open", slotAssignment: "manual" });
+				this.S.append(this.constructor.模板.cloneNode(true));
+				$("button", this.S)[0].addEventListener("click", () => this.测试());
+			}
+			登记(结果) {
+				$("[结果]", this.S)[0].textContent = 结果;
+				$("[时长]", this.S)[0].textContent = (performance.now() - this.t0).toFixed(1);
+			}
+			async 测试() {
+				this.t0 = performance.now();
+				try {
+					await this.运行();
+					this.登记("通过");
+				} catch (error) {
+					this.登记("失败");
+					{
+						const 错误 = document.createElement("pre", { is: "cuo-wu" });
+						错误.textContent = error;
+						this.append(错误);
+					}
+					$("slot:not([name])", this.S)[0].assign(...$("pre", this));
+				}
+			}
+		}, { extends: "section" });
+	</script>
+	<script type="module" src="/库/纂/编纂.test.js"></script>
+	<style>
+		pre {
+			border: 1px dashed currentColor;
+			padding: 1ric;
+			overflow-x: auto;
+		}
+	</style>
+	<template>
+		<style>
+			header {
+				display: flex;
+				gap: .5ric;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+
+			:host {
+				overflow-x: hidden;
+			}
+
+			[结果] {
+				display: contents;
+			}
+
+			[结果]::before {
+				flex: 1;
+				content: "";
+				align-self: center;
+				border-block-end: .15ric currentColor dotted;
+			}
+		</style>
+		<header>
+			<button type="button">运行</button>
+			<div>
+				<slot name="测试名">测试</slot>
+			</div>
+			<div 结果>没有结果</div>
+			<div>（<span 时长>0</span>㎳）</div>
+		</header>
+		<slot></slot>
+	</template>
+	<style>
+	</style>
+	<title>测试文档</title>
+</head>
+
+<body>
+	<header>浏览器测试结果（你好）</header>
+	<main style="display: grid; gap: 1ric;padding: 1ric;">
+	</main>
+</body>
+
+</html>
