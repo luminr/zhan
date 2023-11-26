@@ -5,7 +5,9 @@ export type 配置 = {
 	定位: (谓: string) => Promise<建站模块>;
 	前端报错?: boolean;
 	前端报错模板?: (错误信息: string) => string;
-	替换迭代?: boolean;
+	替换迭代上限?: number;
+	脚本工具箱?: Record<string | number | symbol, unknown>;
+	包括头部?: boolean;
 };
 
 export type 建站模块 = 超文本模块 | 脚本模块 | 静态模块 | 标下模块;
