@@ -18,9 +18,12 @@ const 是文档吗 = (模块) => 模块.媒体类型 === "text/html" && 模块.�
 
 /**
  * @param {import("./簇.ts").建站模块} 模块
- * @returns {DocumentFragment|Document}
+ * @returns {DocumentFragment|Document|string}
  */
 export function 做片段(模块) {
+	if (模块.媒体类型 !== "text/html" && 模块.媒体类型 !== "text/markdown") {
+		return 模块.内容;
+	}
 	const 原稿 = (模块.媒体类型 === "text/markdown") ? md(模块.内容) : 模块.内容;
 	if (是文档吗(模块)) return (new DOMParser()).parseFromString(原稿, "text/html");
 	const 隔离原稿 = `<template>${原稿}</template>`;

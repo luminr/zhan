@@ -162,7 +162,7 @@
 	<script type="application/json" 站:src="json"></script>
 </template>
 <template 结果="数据：模块">
-	<script type="application/json">{"a":1}</script>
+	<script type="application/json">{"a":"<length>"}</script>
 </template>
 <template 稿="脚本：模块">
 	<script 站:src="脚本：外部"></script>
@@ -173,4 +173,23 @@
 <template 稿="标下：模块" type="text/markdown"> # e </template>
 <template 结果="标下：模块">
 	<h1>e</h1>
+</template>
+<template 稿="样式：模块">
+	<style 站:src="样式"></style>
+</template>
+<style 稿="样式">
+	@property --property-name {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #c0ffee;
+	}
+</style>
+<template 结果="样式：模块">
+	<style>
+		@property --property-name {
+			syntax: "<color>";
+			inherits: false;
+			initial-value: #c0ffee;
+		}
+	</style>
 </template>

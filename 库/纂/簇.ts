@@ -3,11 +3,12 @@ export { 编纂超文本 } from "./编纂.js";
 export type 配置 = {
 	关键字?: string;
 	定位: (谓: string) => Promise<建站模块>;
-	前端报错?: boolean;
 	前端报错模板?: (错误信息: string) => string;
+	脚本工具箱?: Record<string | number | symbol, any>;
 	替换迭代上限?: number;
-	脚本工具箱?: Record<string | number | symbol, unknown>;
-	包括头部?: boolean;
+	要前端报错?: boolean;
+	要渲染脚本?: boolean;
+	要包括头部?: boolean;
 };
 
 export type 建站模块 = 超文本模块 | 脚本模块 | 静态模块 | 标下模块;
