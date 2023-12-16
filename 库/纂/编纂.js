@@ -1,7 +1,7 @@
 /// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
-import { importString } from "../源.ts";
+import { dynamicImport, importString } from "../源.ts";
 import { DOCTYPE, 做片段, 做超文本, 断定模块类型 } from "./器.js";
 
 /**
@@ -94,9 +94,14 @@ class 编辑部 {
 	/** @param {{元素: Element, 模块地址:string|null}} 资料  */
 	async #脚本({ 元素, 模块地址 }) {
 		const 模块内容 = 模块地址 ? 断定模块类型(await this.#配置.定位(模块地址), "text/javascript").内容 : 元素.innerHTML;
-		const 脚本 = `export default async ({document, Zhan}) => {${模块内容}};`;
-		const { default: 脚本模块 } = await importString(脚本);
-		await 脚本模块({ document: 元素.getRootNode(), Zhan: this.#配置.脚本工具箱 });
+		const 脚本 = 模块内容;
+		await importString(脚本, {
+			parameters: {
+				document: 元素.getRootNode(),
+				Zhan: this.#配置.脚本工具箱,
+				dynamicImport,
+			},
+		});
 	}
 	/** @param {{元素: Element, 模块地址:string, 模块标签:string}} 资料  */
 	async #替换({ 元素, 模块地址, 模块标签 }) {

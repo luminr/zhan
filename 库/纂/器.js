@@ -21,7 +21,7 @@ const 是文档吗 = (模块) => 模块.媒体类型 === "text/html" && 模块.�
  * @returns {DocumentFragment|Document|string}
  */
 export function 做片段(模块) {
-	if (模块.媒体类型 !== "text/html" && 模块.媒体类型 !== "text/markdown") {
+	if (!["text/html", "text/markdown", "image/svg+xml"].includes(模块.媒体类型)) {
 		return 模块.内容;
 	}
 	const 原稿 = (模块.媒体类型 === "text/markdown") ? md(模块.内容) : 模块.内容;

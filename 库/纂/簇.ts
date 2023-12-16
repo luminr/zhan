@@ -27,7 +27,7 @@ export interface 脚本模块 extends 模块基盘 {
 }
 
 export interface 静态模块 extends 模块基盘 {
-	readonly 媒体类型: "text/css" | "application/json" | "image/svg+xml";
+	readonly 媒体类型: "text/css" | "application/json" | "image/svg+xml" | "text/plain";
 }
 
 export interface 标下模块 extends 模块基盘 {
