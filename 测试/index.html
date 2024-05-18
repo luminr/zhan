@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script type="importmap">{"imports":{"/库/源.ts":"/测试/源.js"}}</script>
+	<script type="importmap">{"imports":{"../库/源.ts":"./源.js"}}</script>
 	<script type="module">
 		globalThis.Deno = {
 			test: (name, fn) => {
@@ -49,7 +49,7 @@
 			}
 		}, { extends: "section" });
 	</script>
-	<script type="module" src="/库/纂/编纂.test.js"></script>
+	<script type="module" src="../库/纂/编纂.test.js"></script>
 	<style>
 		pre {
 			border: 1px dashed currentColor;
